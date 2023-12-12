@@ -1,13 +1,6 @@
 import click
 
 # think of it as a new feature
-# this is another feature by me by me for me to me known by me
-# Mock database (for demonstration purposes)
-# think of it as a new feature
-# Mock database (for demonstration purposes)
-# think of it as a new feature
-# Mock database (for demonstration purposes)
-# think of it as a new feature
 # Mock database (for demonstration purposes)
 books = [
     {"title": "Book 1", "author": "Author A"},
@@ -51,9 +44,8 @@ def delete(title):
 @click.option("--author", help="Author of the book")
 def search(title, author):
     """
-    Search for books by title 
-=======
- 
+    Search for books by title or author.
+    """
     if title:
         found_books = [book for book in books if book["title"] == title]
         if found_books:
