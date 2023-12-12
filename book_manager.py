@@ -45,7 +45,6 @@ def search(title, author):
     """
     Search for books by title or author.
     """
-    # vhguyfjtfgyjvhbunklm;njhgfcdszaserxdtfgyh
     if title:
         found_books = [book for book in books if book["title"] == title]
         if found_books:
