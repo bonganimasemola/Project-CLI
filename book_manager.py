@@ -1,5 +1,6 @@
 import click
 
+# think of it as a new feature
 # Mock database (for demonstration purposes)
 books = [
     {"title": "Book 1", "author": "Author A"},
