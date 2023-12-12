@@ -1,6 +1,7 @@
 import click
 
 # think of it as a new feature
+# this is another feature by me by me for me to me known by me
 # Mock database (for demonstration purposes)
 books = [
     {"title": "Book 1", "author": "Author A"},
