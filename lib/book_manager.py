@@ -1,4 +1,6 @@
-import click
+# Main script for the CLI application
+
+import click   
 
 # Mock database (for demonstration purposes)
 books = [
@@ -44,8 +46,8 @@ def delete(title):
 def search(title, author):
     """
     Search for books by title or author.
-    """ -
-    # vhguyfjtfgyjvhbunklm;njhgfcdszaserxdtfgyh
+    """ 
+    
     if title:
         found_books = [book for book in books if book["title"] == title]
         if found_books:
