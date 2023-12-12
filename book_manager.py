@@ -2,6 +2,12 @@ import click
 
 # think of it as a new feature
 # Mock database (for demonstration purposes)
+# think of it as a new feature
+# Mock database (for demonstration purposes)
+# think of it as a new feature
+# Mock database (for demonstration purposes)
+# think of it as a new feature
+# Mock database (for demonstration purposes)
 books = [
     {"title": "Book 1", "author": "Author A"},
     {"title": "Book 2", "author": "Author B"},
