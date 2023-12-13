@@ -42,12 +42,12 @@ class Author(Base):
                f'best_seller={self.best_seller})'
 
 class Genrer(Base):
-    __tablename__='genrers'
+    __tablename__='genre'
     id=Column(Integer(),primary_key=True)
     name=Column(String())
 
     def __repr__(self):
-        return f'Genrer(id={self.id},' + \
+        return f'Genre(id={self.id},' + \
                f'name={self.name})'
 
 # Create tables in the database

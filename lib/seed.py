@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from main import Book,Author,Genrer
+from main import Book,Author,Genre
 
 if __name__ == '__main__':
     engine=create_engine("sqlite:///book.db")
@@ -23,11 +23,11 @@ if __name__ == '__main__':
     author4 = Author(name='F. Scott Fitzgerald', best_seller='The Great Gatsby')
     author5 = Author(name='Jane Austen', best_seller='Pride and Prejudice')
     
-    genrer1 = Genrer(name='Fantasy')
-    genrer2 = Genrer(name='Mystery')
-    genrer3 = Genrer(name='Romance')
-    genrer4 = Genrer(name='Science Fiction')
-    genrer5 = Genrer(name='Thriller')
+    genre1 = Genre(name='Fantasy')
+    genre2 = Genre(name='Mystery')
+    genre3 = Genre(name='Romance')
+    genre4 = Genre(name='Science Fiction')
+    genre5 = Genre(name='Thriller')
 
-    session.add_all([author1, author2, author3, author4, author5, book1, book2, book3, book4, book5, genrer1, genrer2, genrer3, genrer4, genrer5])
+    session.add_all([author1, author2, author3, author4, author5, book1, book2, book3, book4, book5, genre1, genre2, genre3, genre4, genre5])
     session.commit()
