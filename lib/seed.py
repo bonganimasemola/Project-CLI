@@ -23,11 +23,13 @@ if __name__ == '__main__':
     author4 = Author(name='F. Scott Fitzgerald', best_seller='The Great Gatsby')
     author5 = Author(name='Jane Austen', best_seller='Pride and Prejudice')
     
-    genre1 = Genre(name='Fantasy')
-    genre2 = Genre(name='Mystery')
-    genre3 = Genre(name='Romance')
-    genre4 = Genre(name='Science Fiction')
-    genre5 = Genre(name='Thriller')
+
+    genre = Genre(name='Fantasy')
+    genre = Genre(name='Mystery')
+    genre = Genre(name='Romance')
+    genre = Genre(name='Science Fiction')
+    genre = Genre(name='Thriller')
+
 
     session.add_all([author1, author2, author3, author4, author5, book1, book2, book3, book4, book5, genre1, genre2, genre3, genre4, genre5])
     session.commit()
