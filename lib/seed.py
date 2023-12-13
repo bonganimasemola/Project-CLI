@@ -1,33 +1,65 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from main import Book,Author,Genre
+from main import Book, Author, Genre
 
 if __name__ == '__main__':
-    engine=create_engine("sqlite:///book.db")
-    Session=sessionmaker(bind=engine)
-    session=Session()
+    engine = create_engine("sqlite:///book.db")
+    Session = sessionmaker(bind=engine)
+    session = Session()
 
-    # session.query(Book).delete()
-    # session.query(Author).delete()
-    # session.query(Genre).delete()
+    # Delete existing records before any insertion
+    session.query(Book).delete()
+    session.query(Author).delete()
+    session.query(Genre).delete()
+
+    # Create instances for each class
+    books = [
+        Book(title='The Great Gatsby', isbn=9780743273565,
+             publication_date='1925-04-10', description='Classic novel about the American Dream',
+             publisher='Scribner', language='English', pages_count=180, rating=4),
+
+        Book(title='To Kill a Mockingbird', isbn=9780061120084,
+             publication_date='1960-07-11', description='Powerful story on racial injustice',
+             publisher='Harper Perennial Modern Classics', language='English', pages_count=281, rating=5),
+
+        Book(title='1984', isbn=9780451524935,
+             publication_date='1949-06-08', description='Dystopian vision of a totalitarian future',
+             publisher='Signet Classics', language='English', pages_count=328, rating=4),
+
+        Book(title='Pride and Prejudice', isbn=9780141439518,
+             publication_date='1813-01-28', description='Classic romance novel',
+             publisher='Penguin Classics', language='English', pages_count=279, rating=4),
+
+        Book(title='The Catcher in the Rye', isbn=9780316769488,
+             publication_date='1951-07-16', description='Coming-of-age novel',
+             publisher='Back Bay Books', language='English', pages_count=224, rating=3)
+    ]
+
+    authors = [
+        Author(name='F. Scott Fitzgerald', best_seller='The Great Gatsby'),
+        Author(name='Harper Lee', best_seller='To Kill a Mockingbird'),
+        Author(name='George Orwell', best_seller='1984'),
+        Author(name='Jane Austen', best_seller='Pride and Prejudice'),
+        Author(name='J.D. Salinger', best_seller='The Catcher in the Rye')
+    ]
+
+    genres = [
+        Genre(name='Fiction'),
+        Genre(name='Classic'),
+        Genre(name='Dystopian'),
+        Genre(name='Romance'),
+        Genre(name='Coming-of-age')
+    ]
+
+    # Add instances to the session
+    session.add_all(books + authors + genres)
+
+    # Commit the changes
+    session.commit()
     
-    book1 = Book(title='The Shadow of the Wind', author='Carlos Ruiz Zafón', isbn=9780143034902, publication_date='2004-04-12', description='A mesmerizing literary thriller.', publisher='Penguin Books', language='English', pages_count=487, rating=4)
-    book2 = Book(title='1984', author='George Orwell', isbn=9780451524935, publication_date='1949-06-08', description='A dystopian novel.', publisher='Signet Classic', language='English', pages_count=328, rating=5)
-    book3 = Book(title='To Kill a Mockingbird', author='Harper Lee', isbn=9780061120084, publication_date='1960-07-11', description='A classic of modern American literature.', publisher='Harper Perennial Modern Classics', language='English', pages_count=336, rating=4)
-    book4 = Book(title='The Great Gatsby', author='F. Scott Fitzgerald', isbn=9780743273565, publication_date='1925-04-10', description='An exploration of decadence and idealism.', publisher='Scribner', language='English', pages_count=180, rating=5)
-    book5 = Book(title='Pride and Prejudice', author='Jane Austen', isbn=9780141439518, publication_date='1813-01-28', description='A romantic novel of manners.', publisher='Jungle',language='japanese',pages_count=200,rating=7)
+    for i in range(5):
+        books[i].author = authors[i]
+        books[i].genre = genres[i]
 
-    author1 = Author(name='Carlos Ruiz Zafón', best_seller='The Shadow of the Wind')
-    author2 = Author(name='George Orwell', best_seller='1984')
-    author3 = Author(name='Harper Lee', best_seller='To Kill a Mockingbird')
-    author4 = Author(name='F. Scott Fitzgerald', best_seller='The Great Gatsby')
-    author5 = Author(name='Jane Austen', best_seller='Pride and Prejudice')
-    
-    genre = Genre(name='Fantasy')
-    genre = Genre(name='Mystery')
-    genre = Genre(name='Romance')
-    genre = Genre(name='Science Fiction')
-    genre = Genre(name='Thriller')
 
-    session.add_all([author1, author2, author3, author4, author5, book1, book2, book3, book4, book5, genre1, genre2, genre3, genre4, genre5])
     session.commit()
