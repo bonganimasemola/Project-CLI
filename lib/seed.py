@@ -9,7 +9,7 @@ if __name__ == '__main__':
 
     # session.query(Book).delete()
     # session.query(Author).delete()
-    # session.query(Genrer).delete()
+    # session.query(Genre).delete()
     
     book1 = Book(title='The Shadow of the Wind', author='Carlos Ruiz Zafón', isbn=9780143034902, publication_date='2004-04-12', description='A mesmerizing literary thriller.', publisher='Penguin Books', language='English', pages_count=487, rating=4)
     book2 = Book(title='1984', author='George Orwell', isbn=9780451524935, publication_date='1949-06-08', description='A dystopian novel.', publisher='Signet Classic', language='English', pages_count=328, rating=5)

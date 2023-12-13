@@ -41,7 +41,7 @@ class Author(Base):
                f'name={self.name},' + \
                f'best_seller={self.best_seller})'
 
-class Genrer(Base):
+class Genre(Base):
     __tablename__='genre'
     id=Column(Integer(),primary_key=True)
     name=Column(String())
