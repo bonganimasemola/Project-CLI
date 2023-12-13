@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from main import Book,Author,Genrer
+from main import Book,Author,Genre
 
 if __name__ == '__main__':
     engine=create_engine("sqlite:///book.db")
@@ -9,7 +9,7 @@ if __name__ == '__main__':
 
     # session.query(Book).delete()
     # session.query(Author).delete()
-    # session.query(Genrer).delete()
+    # session.query(Genre).delete()
     
     book1 = Book(title='The Shadow of the Wind', author='Carlos Ruiz Zafón', isbn=9780143034902, publication_date='2004-04-12', description='A mesmerizing literary thriller.', publisher='Penguin Books', language='English', pages_count=487, rating=4)
     book2 = Book(title='1984', author='George Orwell', isbn=9780451524935, publication_date='1949-06-08', description='A dystopian novel.', publisher='Signet Classic', language='English', pages_count=328, rating=5)
@@ -23,11 +23,11 @@ if __name__ == '__main__':
     author4 = Author(name='F. Scott Fitzgerald', best_seller='The Great Gatsby')
     author5 = Author(name='Jane Austen', best_seller='Pride and Prejudice')
     
-    genrer1 = Genrer(name='Fantasy')
-    genrer2 = Genrer(name='Mystery')
-    genrer3 = Genrer(name='Romance')
-    genrer4 = Genrer(name='Science Fiction')
-    genrer5 = Genrer(name='Thriller')
+    genre = Genre(name='Fantasy')
+    genre = Genre(name='Mystery')
+    genre = Genre(name='Romance')
+    genre = Genre(name='Science Fiction')
+    genre = Genre(name='Thriller')
 
-    session.add_all([author1, author2, author3, author4, author5, book1, book2, book3, book4, book5, genrer1, genrer2, genrer3, genrer4, genrer5])
+    session.add_all([author1, author2, author3, author4, author5, book1, book2, book3, book4, book5, genre1, genre2, genre3, genre4, genre5])
     session.commit()
