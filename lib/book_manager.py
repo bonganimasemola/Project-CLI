@@ -1,13 +1,11 @@
-# Main script for the CLI application
+import click
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from main import Book, Author, Genre
 
-import click   
-
-# Mock database (for demonstration purposes)
-books = [
-    {"title": "Book 1", "author": "Author A"},
-    {"title": "Book 2", "author": "Author B"},
-    {"title": "Book 3", "author": "Author C"},
-]
+engine = create_engine("sqlite:///book.db")
+Session = sessionmaker(bind=engine)
+session = Session()
 
 
 @click.group()
@@ -18,12 +16,29 @@ def cli():
 @cli.command()
 @click.argument("title")
 @click.argument("author")
-def add(title, author):
+@click.argument("genre")
+def add(title, author, genre):
     """
     Add a new book.
     """
-    books.append({"title": title, "author": author})
-    click.echo(f"Added book: {title} by {author}")
+    author_obj = session.query(Author).filter_by(name=author).first()
+    genre_obj = session.query(Genre).filter_by(name=genre).first()
+
+    if not author_obj:
+        # Create a new author if not found in the database
+        new_author = Author(name=author)
+        session.add(new_author)
+        session.commit()
+        author_obj = new_author
+
+    if not genre_obj:
+        click.echo(f"Genre '{genre}' not found.")
+        return
+
+    new_book = Book(title=title, author=author_obj, genre=genre_obj)
+    session.add(new_book)
+    session.commit()
+    click.echo(f"Added book: {title} by {author} in {genre}")
 
 
 @cli.command()
@@ -32,12 +47,13 @@ def delete(title):
     """
     Delete a book.
     """
-    for book in books:
-        if book["title"] == title:
-            books.remove(book)
-            click.echo(f"Deleted book: {title}")
-            return
-    click.echo(f"Book '{title}' not found.")
+    book = session.query(Book).filter_by(title=title).first()
+    if book:
+        session.delete(book)
+        session.commit()
+        click.echo(f"Deleted book: {title}")
+    else:
+        click.echo(f"Book '{title}' not found.")
 
 
 @cli.command()
@@ -46,26 +62,8 @@ def delete(title):
 def search(title, author):
     """
     Search for books by title or author.
-    """ 
-    
-    if title:
-        found_books = [book for book in books if book["title"] == title]
-        if found_books:
-            click.echo(f"Books with title '{title}':")
-            for book in found_books:
-                click.echo(f"- {book['title']} by {book['author']}")
-        else:
-            click.echo(f"No books found with title '{title}'.")
-    elif author:
-        found_books = [book for book in books if book["author"] == author]
-        if found_books:
-            click.echo(f"Books by author '{author}':")
-            for book in found_books:
-                click.echo(f"- {book['title']} by {book['author']}")
-        else:
-            click.echo(f"No books found by author '{author}'.")
-    else:
-        click.echo("Please provide title or author for search.")
+    """
+    # Implementation for search by title or author
 
 
 if __name__ == "__main__":
