@@ -16,6 +16,120 @@ The proposed solution is to develop a Command Line Interface (CLI) application f
 
 3. Search Books: Users can search for books based on various criteria, such as title, author, or publication date, making it easy to find specific books within the collection.
 
+## Setup
+
+### Clone the Repository
+
+1.  Clone the repository using Git:
+    
+    bashCopy code
+    
+    `git clone https://github.com/your-username/book-manager.git` 
+    
+
+### Installation
+
+#### Prerequisites
+
+-   Python 3.x
+-   Pip (Python package installer)
+-   SQLite or an alternate SQL database
+
+#### Steps
+
+1.  Navigate to the project directory:
+    
+    
+    `cd book-manager` 
+    
+2.  Create a virtual environment (optional but recommended):
+    
+    
+    `python -m venv venv` 
+    
+3.  Activate the virtual environment (if created):
+    
+    -   Windows:
+        
+       
+        
+        `venv\Scripts\activate` 
+        
+    -   macOS and Linux:
+        
+      
+        
+        `source venv/bin/activate` 
+        
+4.  Install project dependencies:
+    
+    
+    
+    `pip install -r requirements.txt` 
+    
+5.  Create the initial database and seed data:
+    
+ 
+    
+    `python seed.py` 
+    
+
+## File Structure
+
+
+`
+book-manager/
+│
+├── alembic.ini
+├── book.db
+├── book_manager.py
+├── database/
+│   ├── book_manager.db
+│   ├── temp_db.db
+│   └── tempfile.sql
+├── main.py
+├── migrations/
+│   ├── env.py
+│   ├── README
+│   ├── script.py.mako
+│   └── versions/
+│       ├── 014a007cc6b4_retry.py
+│       ├── 364d1300f164_another_retry.py
+│       ├── 73c0d59701a0_retry.py
+│       └── a3dfa8d76a57_first_atempt_in_table_insertion_with_no_.py
+├── __pycache__/
+│   └── main.cpython-310.pyc
+└── seed.py
+` 
+
+## Usage
+
+### Commands
+
+#### Adding a Book
+
+To add a book to the database, use the following command:
+
+
+
+`python book_manager.py add "Title of the Book" "Author Name" "Genre Name"` 
+
+#### Deleting a Book
+
+To delete a book from the database, use the following command:
+
+
+
+`python book_manager.py delete "Title of the Book"` 
+
+#### Searching for Books
+
+To search for books by title or author, use the following command:
+
+
+
+`python book_manager.py search "Search Term"` 
+
 ## Future Considerations
 
 As the project evolves, several features and improvements can be considered for future development:
