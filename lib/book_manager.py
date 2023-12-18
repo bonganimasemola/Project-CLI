@@ -57,14 +57,28 @@ def delete(title):
 
 
 @cli.command()
-@click.option("--title", help="Title of the book")
-@click.option("--author", help="Author of the book")
-def search(title, author):
+@click.argument("search_term", nargs=-1)
+def search(search_term):
     """
     Search for books by title or author.
     """
-    # Implementation for search by title or author
+    search_query = ' '.join(search_term)
+    found_books = (
+        session.query(Book)
+        .join(Author)
+        .filter(
+            (Book.title.ilike(f"%{search_query}%")) | 
+            (Author.name.ilike(f"%{search_query}%"))
+        )
+        .all()
+    )
 
+    if found_books:
+        click.echo(f"Books related to '{search_query}':")
+        for book in found_books:
+            click.echo(f"- {book.title} by {book.author.name}")
+    else:
+        click.echo(f"No books found related to '{search_query}'")
 
 if __name__ == "__main__":
     cli()
